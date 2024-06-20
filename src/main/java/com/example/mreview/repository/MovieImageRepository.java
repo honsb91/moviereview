@@ -1,4 +1,7 @@
 package com.example.mreview.repository;
 
-public class MovieImageRepository {
+import com.example.mreview.entity.MovieImage;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovieImageRepository extends JpaRepository<MovieImage, Long> {
 }
