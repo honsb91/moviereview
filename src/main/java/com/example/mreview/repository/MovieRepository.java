@@ -11,15 +11,15 @@ import java.util.List;
 public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     // 페이지 처리
-    @Query("select m, mi, avg(coalesce(r.grade,0)), count(distinct r) from Movie m " +
+    @Query("select m, mi, avg(coalesce(r.grade,0)),  count(distinct r) from Movie m " +
             "left outer join MovieImage mi on mi.movie = m " +
-            "left outer join Review r on r.movie = m group by m")
+            "left outer join Review  r on r.movie = m group by m ")
     Page<Object[]> getListPage(Pageable pageable);
 
     // 특정영화 조회
-    @Query("select m, mi, avg(colesce(r.grade,0), count(distinct(r))" +
-           " from Movie m left outer join MovieImage mi on mi.movie = m " +
-           " left outer join Review r on r.movie = m " +
-           " where m.mno = :mno group by mi")
+    @Query("select m, mi ,avg(coalesce(r.grade,0)),  count(r)" +
+            " from Movie m left outer join MovieImage mi on mi.movie = m " +
+            " left outer join Review  r on r.movie = m "+
+            " where m.mno = :mno group by mi")
     List<Object[]> getMovieWithAll(Long mno);
 }
